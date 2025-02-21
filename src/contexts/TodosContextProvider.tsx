@@ -40,10 +40,10 @@ export default function TodosContextProvider({
   // actions / event handlers
   const addTodo = (content: string) => {
     // check if user is logged in
-    // if (todos.length >= 3 && !isAuthenticated) {
-    //   alert("Thêm lời nhắc cần phải đăng nhập");
-    //   return;
-    // }
+    if (todos.length >= 4 && !isAuthenticated) {
+      alert("Thêm hơn 4 lời nhắc cần phải đăng nhập");
+      return;
+    }
 
     setTodos([
       ...todos,
