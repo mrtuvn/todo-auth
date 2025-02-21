@@ -4,7 +4,7 @@ import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
 import App from "./App.tsx";
 import TodosContextProvider from "./contexts/TodosContextProvider.tsx";
-const URL_PROD = "https://todo-auth-mu.vercel.app/";
+const URL_PROD = "https://todo-auth-mu.vercel.app";
 
 createRoot(document.getElementById("root")!).render(
   <StrictMode>
