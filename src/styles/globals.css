@@ -1,0 +1,60 @@
+@import "tailwindcss";
+
+:root {
+  --background: #ffffff;
+  --foreground: #171717;
+}
+
+@theme {
+  --font-sans: "Be Vietnam Pro", sans-serif;
+  --breakpoint-xs: 320px;
+  --breakpoint-3xl: 120rem;
+  /* Define your custom theme here if needed */
+  --color-primary: #0070f3;
+  --color-secondary: #1a202c;
+  --color-board: #fffcf9;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background: #0a0a0a;
+    --foreground: #ededed;
+  }
+}
+
+body {
+  min-width: 360px;
+  color: var(--foreground);
+  background: var(--background);
+  font-family: var(--font-sans);
+}
+
+/* @media (max-height: 950px) {
+  h1 {
+    top: 5%;
+  }
+}
+
+@media (max-height: 916px) {
+  h1 {
+    top: 3.5%;
+  }
+}
+
+@media (max-height: 883px) {
+  h1 {
+    top: 2.5%;
+  }
+}
+
+@media (max-height: 850px) {
+  h1 {
+    top: 0%;
+  }
+}
+
+@media (max-height: 800px) {
+  h1 {
+    top: -3%;
+  }
+} */
