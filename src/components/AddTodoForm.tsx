@@ -26,6 +26,17 @@ export default function AddTodoForm() {
         }}
       />
       <Button>Thêm lời nhắc</Button>
+
+      {/* {completedCount > 0 && (
+        <div className="mt-2">
+          <Button
+            classCustom=" bg-blue-600"
+            onClick={handleFilterCompletedTodos}
+          >
+            {showCompleted ? "Ẩn" : "Hiện"} việc đã làm
+          </Button>
+        </div>
+      )} */}
     </form>
   );
 }

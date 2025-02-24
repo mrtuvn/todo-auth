@@ -6,38 +6,40 @@ export default function TodoList() {
   const { todos, toggleTodo, isLoading } = useTodosContext();
 
   return (
-    <ul className="[scrollbar-width:thin] relative grow-[9999] basis-[500px]">
-      {isLoading && (
-        <li className="h-full flex justify-center items-center font-semibold">
-          Hiển thị lời nhắc...
-        </li>
-      )}
-
-      {todos.length === 0 ? (
-        <li className="h-full min-h-[200px] flex justify-center items-center font-semibold">
-          Chưa có lời nhắc nào. Hãy thêm lời nhắc mới
-        </li>
-      ) : null}
-
-      {todos.map((todo: Todo) => {
-        return (
-          <li
-            key={todo.id}
-            className={`flex text-lg justify-between items-center px-8 h-[50px]  cursor-pointer border-b border-b-[rgba(0,0,0,0.08)]`}
-            onClick={() => {
-              toggleTodo(todo.id);
-            }}
-          >
-            <span
-              className={`${todo.completed ? "line-through text-[#ccc]" : ""}`}
-            >
-              {todo.content}
-            </span>
-
-            <DeleteButton id={todo.id} />
+    <>
+      <ul className="[scrollbar-width:thin] overflow-y-auto xs:max-h-[65svh] md:max-h-none relative grow-[9999] basis-[500px]">
+        {isLoading && (
+          <li className="h-full flex justify-center items-center font-semibold">
+            Hiển thị lời nhắc...
           </li>
-        );
-      })}
-    </ul>
+        )}
+
+        {todos.length === 0 ? (
+          <li className="h-full min-h-[200px] flex justify-center items-center font-semibold">
+            Chưa có lời nhắc nào. Hãy thêm lời nhắc mới
+          </li>
+        ) : null}
+
+        {todos.map((todo: Todo) => {
+          return (
+            <li
+              key={todo.id}
+              className={`flex text-lg justify-between items-center px-8 h-[50px]  cursor-pointer border-b border-b-[rgba(0,0,0,0.08)]`}
+              onClick={() => {
+                toggleTodo(todo.id);
+              }}
+            >
+              <span
+                className={`${todo.completed ? "line-through text-[#ccc]" : ""}`}
+              >
+                {todo.content}
+              </span>
+
+              <DeleteButton id={todo.id} />
+            </li>
+          );
+        })}
+      </ul>
+    </>
   );
 }

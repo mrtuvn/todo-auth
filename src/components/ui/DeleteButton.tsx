@@ -5,6 +5,7 @@ export default function DeleteButton({ id }: { id: number }) {
 
   return (
     <button
+      className="cursor-pointer"
       onClick={(e) => {
         e.stopPropagation();
         deleteTodo(id);

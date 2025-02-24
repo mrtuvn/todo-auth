@@ -1,15 +1,18 @@
 import { Todo } from "@/types/Todo";
-import { useKindeAuth } from "@kinde-oss/kinde-auth-react";
 import { createContext, useEffect, useState } from "react";
 
 type TodosContextType = {
   todos: Todo[];
+  filterCompletedTodos: Todo[];
   isLoading: boolean;
   totalCount: number;
   completedCount: number;
   addTodo: (content: string) => void;
   toggleTodo: (id: number) => void;
   deleteTodo: (id: number) => void;
+  showCompleted: boolean;
+  toggleShowCompleted: () => void;
+  handleFilterCompletedTodos: () => void;
 };
 
 export const TodosContext = createContext<TodosContextType>(
@@ -21,7 +24,7 @@ export default function TodosContextProvider({
 }: {
   children: React.ReactNode;
 }) {
-  const { isAuthenticated } = useKindeAuth();
+  //const { isAuthenticated } = useKindeAuth();
   // state
   const [todos, setTodos] = useState<Todo[]>(() => {
     const savedData = localStorage.getItem("todos");
@@ -31,7 +34,11 @@ export default function TodosContextProvider({
       return [];
     }
   });
+
+  const [filterCompletedTodos, setFilterCompletedTodos] = useState<Todo[]>([]);
+
   const [isLoading, setIsLoading] = useState(false);
+  const [showCompleted, setShowCompleted] = useState<boolean>(true);
 
   // derived state
   const totalCount = todos.length;
@@ -40,10 +47,10 @@ export default function TodosContextProvider({
   // actions / event handlers
   const addTodo = (content: string) => {
     // check if user is logged in
-    if (todos.length >= 4 && !isAuthenticated) {
-      alert("Thêm hơn 4 lời nhắc cần phải đăng nhập");
-      return;
-    }
+    // if (todos.length >= 4 && !isAuthenticated) {
+    //   alert("Thêm hơn 4 lời nhắc cần phải đăng nhập");
+    //   return;
+    // }
 
     setTodos([
       ...todos,
@@ -54,6 +61,7 @@ export default function TodosContextProvider({
       },
     ]);
   };
+
   const toggleTodo = (id: number) => {
     setTodos(
       todos.map((todo) =>
@@ -61,8 +69,28 @@ export default function TodosContextProvider({
       ),
     );
   };
+
   const deleteTodo = (id: number) => {
     setTodos(todos.filter((todo) => todo.id !== id));
+  };
+
+  const toggleShowCompleted = () => {
+    setShowCompleted((prev) => !prev);
+  };
+
+  const handleFilterCompletedTodos = () => {
+    console.log("run click");
+    console.log(showCompleted);
+    
+    if (showCompleted && todos.length > 0 && completedCount > 0) {
+      //hien thi item completed
+      setFilterCompletedTodos(todos.filter((todo) => !todo.completed));
+    }
+    if (!showCompleted && todos) {
+      setFilterCompletedTodos(todos);
+      toggleShowCompleted();
+    }
+    toggleShowCompleted();
   };
 
   // side effects write localstorage
@@ -81,21 +109,32 @@ export default function TodosContextProvider({
     //   setIsLoading(false);
     // };
     setIsLoading(true);
+    //if (filterCompletedTodos.length === 0 || !filterCompletedTodos) {
     localStorage.setItem("todos", JSON.stringify(todos));
+    //}
+
     setIsLoading(false);
     //fetchTodos();
   }, [todos]);
+
+  useEffect(() => {
+    setFilterCompletedTodos(todos.filter((todo) => todo.completed));
+  }, [completedCount, showCompleted]);
 
   return (
     <TodosContext.Provider
       value={{
         todos,
+        filterCompletedTodos,
         isLoading,
         totalCount,
         completedCount,
         addTodo,
         toggleTodo,
         deleteTodo,
+        showCompleted,
+        toggleShowCompleted,
+        handleFilterCompletedTodos,
       }}
     >
       {children}
