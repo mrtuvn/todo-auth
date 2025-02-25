@@ -3,7 +3,14 @@ import { useTodosContext } from "@/lib/hooks";
 import type { Todo } from "@/types/Todo";
 
 export default function TodoList() {
-  const { todos, toggleTodo, isLoading } = useTodosContext();
+  const { todos, toggleTodo, isLoading, showCompleted } = useTodosContext();
+
+  const displayedTodos = showCompleted
+    ? todos.filter((todo) => !todo.completed)
+    : [...todos].sort((a: Todo, b: Todo) => a.completed - b.completed);
+
+  console.log(displayedTodos);
+  console.log(todos);
 
   return (
     <>
@@ -14,13 +21,13 @@ export default function TodoList() {
           </li>
         )}
 
-        {todos.length === 0 ? (
+        {displayedTodos.length === 0 ? (
           <li className="h-full min-h-[200px] flex justify-center items-center font-semibold">
             Chưa có lời nhắc nào. Hãy thêm lời nhắc mới
           </li>
         ) : null}
 
-        {todos.map((todo: Todo) => {
+        {displayedTodos.map((todo: Todo) => {
           return (
             <li
               key={todo.id}

@@ -3,7 +3,6 @@ import { createContext, useEffect, useState } from "react";
 
 type TodosContextType = {
   todos: Todo[];
-  filterCompletedTodos: Todo[];
   isLoading: boolean;
   totalCount: number;
   completedCount: number;
@@ -12,7 +11,6 @@ type TodosContextType = {
   deleteTodo: (id: number) => void;
   showCompleted: boolean;
   toggleShowCompleted: () => void;
-  handleFilterCompletedTodos: () => void;
 };
 
 export const TodosContext = createContext<TodosContextType>(
@@ -34,8 +32,6 @@ export default function TodosContextProvider({
       return [];
     }
   });
-
-  const [filterCompletedTodos, setFilterCompletedTodos] = useState<Todo[]>([]);
 
   const [isLoading, setIsLoading] = useState(false);
   const [showCompleted, setShowCompleted] = useState<boolean>(true);
@@ -78,38 +74,10 @@ export default function TodosContextProvider({
     setShowCompleted((prev) => !prev);
   };
 
-  const handleFilterCompletedTodos = () => {
-    console.log("run click");
-    console.log(showCompleted);
-    
-    if (showCompleted && todos.length > 0 && completedCount > 0) {
-      //hien thi item completed
-      setFilterCompletedTodos(todos.filter((todo) => !todo.completed));
-    }
-    if (!showCompleted && todos) {
-      setFilterCompletedTodos(todos);
-      toggleShowCompleted();
-    }
-    toggleShowCompleted();
-  };
-
   // side effects write localstorage
   useEffect(() => {
-    // const fetchTodos = async () => {
-    //   setIsLoading(true);
-
-    //   //   const response = await fetch(
-    //   //     "https://bytegrad.com/course-assets/api/todos",
-    //   //   );
-    //   //   const todos = await response.json();
-    //   //localStorage.setItem("todos", JSON.stringify(todos));
-
-    //   setTodos(todos);
-
-    //   setIsLoading(false);
-    // };
     setIsLoading(true);
-    //if (filterCompletedTodos.length === 0 || !filterCompletedTodos) {
+
     localStorage.setItem("todos", JSON.stringify(todos));
     //}
 
@@ -117,15 +85,10 @@ export default function TodosContextProvider({
     //fetchTodos();
   }, [todos]);
 
-  useEffect(() => {
-    setFilterCompletedTodos(todos.filter((todo) => todo.completed));
-  }, [completedCount, showCompleted]);
-
   return (
     <TodosContext.Provider
       value={{
         todos,
-        filterCompletedTodos,
         isLoading,
         totalCount,
         completedCount,
@@ -134,7 +97,6 @@ export default function TodosContextProvider({
         deleteTodo,
         showCompleted,
         toggleShowCompleted,
-        handleFilterCompletedTodos,
       }}
     >
       {children}

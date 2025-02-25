@@ -4,7 +4,8 @@ import React from "react";
 
 export default function AddTodoForm() {
   const [todoContent, setTodoContent] = React.useState("");
-  const { addTodo } = useTodosContext();
+  const { addTodo, showCompleted, toggleShowCompleted, completedCount } =
+    useTodosContext();
 
   return (
     <form
@@ -27,16 +28,20 @@ export default function AddTodoForm() {
       />
       <Button>Thêm lời nhắc</Button>
 
-      {/* {completedCount > 0 && (
-        <div className="mt-2">
-          <Button
-            classCustom=" bg-blue-600"
-            onClick={handleFilterCompletedTodos}
-          >
-            {showCompleted ? "Ẩn" : "Hiện"} việc đã làm
-          </Button>
-        </div>
-      )} */}
+      {completedCount > 0 && (
+        <label className="block mt-2 cursor-pointer">
+          <input
+            type="checkbox"
+            className="input mr-2"
+            checked={showCompleted ?? false}
+            onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+              e.isPropagationStopped();
+              toggleShowCompleted();
+            }}
+          />
+          Ẩn việc đã làm
+        </label>
+      )}
     </form>
   );
 }
