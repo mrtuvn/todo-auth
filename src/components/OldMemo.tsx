@@ -34,6 +34,11 @@ export function OldMemo() {
       button: "Explore Component",
       src: "/memory/thao.jpg",
     },
+    {
+      title: "",
+      button: "Explore Component",
+      src: "/memory/welcome-home.jpeg",
+    },
   ];
 
   return (

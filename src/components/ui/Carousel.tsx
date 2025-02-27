@@ -44,6 +44,20 @@ const Slide = ({ slide, index, current, handleSlideClick }: SlideProps) => {
     };
   }, []);
 
+  function getFileNameFromUrl(url: string): string {
+    const parts = url.split("/");
+    return parts[parts.length - 1];
+  }
+
+  const handleDownloadImage = (src: string) => {
+    const a = document.createElement("a");
+    a.href = src;
+    a.download = getFileNameFromUrl(src);
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+  };
+
   const handleMouseMove = (event: React.MouseEvent) => {
     const el = slideRef.current;
     if (!el) return;
@@ -68,7 +82,7 @@ const Slide = ({ slide, index, current, handleSlideClick }: SlideProps) => {
     <div className="[perspective:1200px] [transform-style:preserve-3d]">
       <li
         ref={slideRef}
-        className="flex flex-1 flex-col items-center  items-center justify-end relative text-center text-white opacity-100 transition-all duration-300 ease-in-out w-[70vmin] h-[70vmin] mx-[4vmin] z-10 "
+        className="flex flex-1 flex-col items-center justify-end relative text-center text-white opacity-100 transition-all duration-300 ease-in-out w-[70vmin] h-[70vmin] mx-[4vmin] z-10 "
         onClick={() => handleSlideClick(index)}
         onMouseMove={handleMouseMove}
         onMouseLeave={handleMouseLeave}
@@ -114,11 +128,14 @@ const Slide = ({ slide, index, current, handleSlideClick }: SlideProps) => {
           <h2 className="text-lg md:text-2xl lg:text-4xl font-semibold  relative">
             {title}
           </h2>
-          {/* <div className="flex justify-center hidden">
-            <button className="mt-6  px-4 py-2 w-fit mx-auto sm:text-sm text-black bg-white h-12 border border-transparent text-xs flex justify-center items-center rounded-2xl hover:shadow-lg transition duration-200 shadow-[0px_2px_3px_-1px_rgba(0,0,0,0.1),0px_1px_0px_0px_rgba(25,28,33,0.02),0px_0px_0px_1px_rgba(25,28,33,0.08)]">
-              {button}
+          <div className="flex justify-center">
+            <button
+              onClick={() => handleDownloadImage(src)}
+              className="mt-6  px-4 py-2 w-fit mx-auto sm:text-sm text-black bg-white h-12 border border-transparent text-xs flex justify-center items-center rounded-2xl hover:shadow-lg transition duration-200 shadow-[0px_2px_3px_-1px_rgba(0,0,0,0.1),0px_1px_0px_0px_rgba(25,28,33,0.02),0px_0px_0px_1px_rgba(25,28,33,0.08)]"
+            >
+              Tải ảnh
             </button>
-          </div> */}
+          </div>
         </article>
       </li>
     </div>
