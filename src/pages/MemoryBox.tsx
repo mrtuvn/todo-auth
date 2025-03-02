@@ -10,10 +10,20 @@ const MemoryBox = () => {
       <OldMemo />
 
       <div className="mt-4 p-2 text-center">
-        Nếu em xem được ảnh này có thể em đã đặt chân xuống sân bay và đã về nhà
-        với gia đình. Chúc em một ngày tốt lành! Cảm ơn Nhật Bản đã cho em nhiều
-        trải nghiệm quý giá, dù có nhiều khó khăn vẫt vả nhưng sau cùng vẫn là
-        rất nhiều kỷ niệm, niềm vui và những người bạn tốt.
+        <p>
+          Nếu em xem được ảnh này có thể em đã đặt chân xuống sân bay và đã về
+          nhà với gia đình 🏠.
+        </p>
+        <p>
+          Cảm ơn Nhật Bản đã cho em nhiều trải nghiệm quý giá, dù có nhiều khó
+          khăn nhưng sau cùng vẫn là rất nhiều kỷ niệm, niềm vui và những người
+          bạn tốt.
+        </p>
+        <p>
+          A tin em sẽ có những phát triển, thành công trên chặng đường mới, có
+          nhiều cuộc phưu lưu mới. Rất vui được đồng hành cùng em
+        </p>
+        <p className="">Gửi em nhiều yêu thương - Tú</p>
       </div>
     </div>
   );
