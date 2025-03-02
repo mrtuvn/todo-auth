@@ -11,7 +11,7 @@ const MemoryBox = () => {
 
       <div className="mt-4 p-2 text-center">
         <p>
-          Nếu em xem được ảnh này có thể em đã đặt chân xuống sân bay và đã về
+          Nếu em đang xem được ảnh này là em đã đặt chân xuống sân bay và đã về
           nhà với gia đình 🏠.
         </p>
         <p>
@@ -20,7 +20,7 @@ const MemoryBox = () => {
           bạn tốt.
         </p>
         <p>
-          A tin em sẽ có những phát triển, thành công trên chặng đường mới, có
+          A tin là em sẽ có những phát triển, thành công trên chặng đường mới, có
           nhiều cuộc phưu lưu mới. Rất vui được đồng hành cùng em
         </p>
         <p className="">Gửi em nhiều yêu thương - Tú</p>
