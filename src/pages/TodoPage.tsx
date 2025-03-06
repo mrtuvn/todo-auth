@@ -23,12 +23,6 @@ const TodoPage = () => {
           <Sidebar />
         </div>
         <div className="flex gap-2 mt-2 flex-col justify-center items-center w-full h-20 bg-blue min-h-[80px]  outline-amber-200">
-          <img
-            src="/snoopy.webp"
-            loading="lazy"
-            alt="snoopy"
-            className="rounded-md min-h-[140px] aspect-square"
-          />
           <Link to="/mystery">
             <PulsatingButton className="animate-bounce">
               🎉 Mở túi bí mật nè 🎉
