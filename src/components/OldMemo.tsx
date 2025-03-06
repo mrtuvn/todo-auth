@@ -2,7 +2,7 @@
 
 import Carousel from "@/components/ui/Carousel";
 
-export function OldMemo() {
+export default function OldMemo() {
   const slideData = [
     {
       title: "Chúng ta đã có một trải nghiệm tuyệt vời cùng nhau",
